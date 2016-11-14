@@ -4,6 +4,11 @@
     margin-top: 50px;
     margin-bottom: 50px;
 }
+.switchers{
+    text-align: center;
+    font-size: 50px;
+    margin-top: 10px;
+}
 .cell{
     height:200px;
     border-width: 1px;
