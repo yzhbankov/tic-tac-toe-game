@@ -16,6 +16,8 @@
             } else {
                 playerType = "O";
                 computerType = "X";
+                arr = minimax(arr, computerType);
+                render(arr);
             }
         })
     });
