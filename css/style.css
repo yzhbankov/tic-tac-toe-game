@@ -17,3 +17,11 @@
     text-align: center;
     font-size: 100px;
 }
+.score{
+    font-size: 30px;
+    text-align: left;
+}
+.players{
+    text-align: center;
+    font-size: 30px;
+}

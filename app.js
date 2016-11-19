@@ -7,6 +7,8 @@
     var switchers = document.querySelectorAll(".switch-js");
     var playerType = "X";
     var computerType = "O";
+    var scoreO = document.querySelector(".score-O-js");
+    var scoreX = document.querySelector(".score-X-js");
 
     switchers.forEach(function (item) {
         item.addEventListener("click", function () {
@@ -34,13 +36,34 @@
                     }
                 });
             }
+            if (arr.indexOf(null) == -1) {
+                alert("Draw!");
+                clear(arr);
+            }
             if (won(arr, playerType)) {
                 alert(playerType + " win!");
+                clear(arr);
+                if (playerType == "X") {
+                    scoreX.innerText = Number(scoreX.innerText) + 1;
+                } else {
+                    scoreO.innerText = Number(scoreO.innerText) + 1;
+                }
+
             } else {
                 arr = minimax(arr, computerType);
                 render(arr);
                 if (won(arr, computerType)) {
                     alert(computerType + " win!");
+                    clear(arr);
+                    if (computerType == "X") {
+                        scoreX.innerText = Number(scoreX.innerText) + 1;
+                    } else {
+                        scoreO.innerText = Number(scoreO.innerText) + 1;
+                    }
+                }
+                if (arr.indexOf(null) == -1) {
+                    alert("Draw!");
+                    clear(arr);
                 }
             }
         });
@@ -89,6 +112,14 @@
         cells.forEach(function (item, i) {
             item.innerText = arr[i];
         });
+    }
+
+    function clear(arr) {
+        arr.forEach(function (item, i) {
+            arr[i] = null;
+        });
+        console.log(arr);
+        render(arr);
     }
 
 })();
