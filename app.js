@@ -2,7 +2,47 @@
  * Created by Iaroslav Zhbankov on 14.11.2016.
  */
 (function () {
-    var arr = ["x", null, null, null, null, null, null, null, null];
+    var arr = [null, null, null, null, null, null, null, null, null];
+    var cells = document.querySelectorAll(".cell");
+    var switchers = document.querySelectorAll(".switch-js");
+    var playerType = "X";
+    var computerType = "O";
+
+    switchers.forEach(function (item) {
+        item.addEventListener("click", function () {
+            if (item.innerText == "X") {
+                playerType = "X";
+                computerType = "O";
+            } else {
+                playerType = "O";
+                computerType = "X";
+            }
+        })
+    });
+
+    cells.forEach(function (item) {
+        item.addEventListener("click", function () {
+            if ((item.innerText != "X") && (item.innerText != "O")) {
+                item.innerText = playerType;
+                cells.forEach(function (item, i) {
+                    if ((item.innerText == "X") || (item.innerText == "O")) {
+                        return arr[i] = item.innerText;
+                    } else {
+                        return arr[i] = null;
+                    }
+                });
+            }
+            if (won(arr, playerType)) {
+                alert(playerType + " win!");
+            } else {
+                arr = minimax(arr, computerType);
+                render(arr);
+                if (won(arr, computerType)) {
+                    alert(computerType + " win!");
+                }
+            }
+        });
+    });
 
     function won(arr, type) {
         for (var i = 0; i < 3; i++) {
@@ -37,12 +77,16 @@
                 result = true;
                 return newSet[j];
             }
-            if (!result) {
-                return newSet[Math.floor(Math.random() * newSet.length)];
-            }
+        }
+        if (!result) {
+            return newSet[Math.floor(Math.random() * newSet.length)];
         }
     }
 
-    minimax(arr);
+    function render(arr) {
+        cells.forEach(function (item, i) {
+            item.innerText = arr[i];
+        });
+    }
 
 })();
