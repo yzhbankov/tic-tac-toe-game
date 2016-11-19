@@ -12,10 +12,13 @@
 .cell{
     height:200px;
     border-width: 1px;
-    border-color: black;
+    border-color: white;
+    color: white;
+
     border-style: solid;
     text-align: center;
     font-size: 100px;
+    background-color: #0cc0a8;
 }
 .score{
     font-size: 30px;
