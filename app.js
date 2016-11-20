@@ -10,6 +10,8 @@
     var computerType = "O";
     var scoreO = document.querySelector(".score-O-js");
     var scoreX = document.querySelector(".score-X-js");
+    var field = document.querySelector(".field-js");
+    var result = document.querySelector(".result");
 
 
     switcherX.addEventListener("click", function () {
@@ -43,36 +45,38 @@
                         return arr[i] = null;
                     }
                 });
-            }
-            if (arr.indexOf(null) == -1) {
-                alert("Draw!");
-                clear(arr);
-            }
-            if (won(arr, playerType)) {
-                alert(playerType + " win!");
-                clear(arr);
-                if (playerType == "X") {
-                    scoreX.innerText = Number(scoreX.innerText) + 1;
-                } else {
-                    scoreO.innerText = Number(scoreO.innerText) + 1;
-                }
 
-            } else {
-                arr = minimax(arr, computerType);
-                render(arr);
-                if (won(arr, computerType)) {
-                    alert(computerType + " win!");
+                if (arr.indexOf(null) == -1) {
+                    result.innerText = "Draw!";
                     clear(arr);
-                    if (computerType == "X") {
+                }
+                if (won(arr, playerType)) {
+                    result.innerText = playerType + " win!";
+                    clear(arr);
+                    if (playerType == "X") {
                         scoreX.innerText = Number(scoreX.innerText) + 1;
                     } else {
                         scoreO.innerText = Number(scoreO.innerText) + 1;
                     }
+
+                } else {
+                    arr = minimax(arr, computerType);
+                    render(arr);
+                    if (won(arr, computerType)) {
+                        result.innerText = computerType + "win!";
+                        clear(arr);
+                        if (computerType == "X") {
+                            scoreX.innerText = Number(scoreX.innerText) + 1;
+                        } else {
+                            scoreO.innerText = Number(scoreO.innerText) + 1;
+                        }
+                    }
+                    if (arr.indexOf(null) == -1) {
+                        result.innerText = "Draw!";
+                        clear(arr);
+                    }
                 }
-                if (arr.indexOf(null) == -1) {
-                    alert("Draw!");
-                    clear(arr);
-                }
+
             }
         });
     });
