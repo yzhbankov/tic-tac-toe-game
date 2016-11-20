@@ -4,25 +4,33 @@
 (function () {
     var arr = [null, null, null, null, null, null, null, null, null];
     var cells = document.querySelectorAll(".cell");
-    var switchers = document.querySelectorAll(".switch-js");
+    var switcherX = document.querySelector(".switch-js-x");
+    var switcherO = document.querySelector(".switch-js-o");
     var playerType = "X";
     var computerType = "O";
     var scoreO = document.querySelector(".score-O-js");
     var scoreX = document.querySelector(".score-X-js");
 
-    switchers.forEach(function (item) {
-        item.addEventListener("click", function () {
-            if (item.innerText == "X") {
-                playerType = "X";
-                computerType = "O";
-            } else {
-                playerType = "O";
-                computerType = "X";
-                arr = minimax(arr, computerType);
-                render(arr);
-            }
-        })
+
+    switcherX.addEventListener("click", function () {
+        switcherX.setAttribute("style", "border-style: solid;");
+        switcherO.setAttribute("style", "border-style: hidden;");
+        playerType = "X";
+        computerType = "O";
+        clear(arr);
+
     });
+
+    switcherO.addEventListener("click", function () {
+        switcherO.setAttribute("style", "border-style: solid;");
+        switcherX.setAttribute("style", "border-style: hidden;");
+        playerType = "O";
+        computerType = "X";
+        clear(arr);
+        arr = minimax(arr, computerType);
+        render(arr);
+    });
+
 
     cells.forEach(function (item) {
         item.addEventListener("click", function () {
