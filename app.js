@@ -13,14 +13,12 @@
     var field = document.querySelector(".field-js");
     var result = document.querySelector(".result");
 
-
     switcherX.addEventListener("click", function () {
         switcherX.setAttribute("style", "border-style: solid;");
         switcherO.setAttribute("style", "border-style: hidden;");
         playerType = "X";
         computerType = "O";
         clear(arr);
-
     });
 
     switcherO.addEventListener("click", function () {
@@ -33,7 +31,6 @@
         render(arr);
     });
 
-
     cells.forEach(function (item) {
         item.addEventListener("click", function () {
             if ((item.innerText != "X") && (item.innerText != "O")) {
@@ -45,20 +42,19 @@
                         return arr[i] = null;
                     }
                 });
-
                 if (arr.indexOf(null) == -1) {
                     result.innerText = "Draw!";
                     clear(arr);
                 }
                 if (won(arr, playerType)) {
                     result.innerText = playerType + " win!";
+                    hideShow();
                     clear(arr);
                     if (playerType == "X") {
                         scoreX.innerText = Number(scoreX.innerText) + 1;
                     } else {
                         scoreO.innerText = Number(scoreO.innerText) + 1;
                     }
-
                 } else {
                     arr = minimax(arr, computerType);
                     render(arr);
@@ -76,7 +72,6 @@
                         clear(arr);
                     }
                 }
-
             }
         });
     });
@@ -132,6 +127,46 @@
         });
         console.log(arr);
         render(arr);
+    }
+
+    function hideShow() {
+        var ticks = 0;
+        var fieldHide = setInterval(function () {
+            ticks++;
+            $(".field-js").css("opacity", (0.1 * (10 - ticks)).toString());
+            if (ticks == 10) {
+                clearInterval(fieldHide);
+                $(".field-js").hide();
+                ticks = 0;
+            }
+        }, 50);
+        var statusShow = setInterval(function () {
+            $(".result").show();
+            ticks++;
+            $(".field-js").css("opacity", (0.1 * (ticks)).toString());
+            if (ticks == 10) {
+                clearInterval(statusShow);
+                ticks = 0;
+            }
+        }, 50);
+        var statusHide = setInterval(function () {
+            ticks++;
+            $(".result").css("opacity", (0.1 * (10 - ticks)).toString());
+            if (ticks == 10) {
+                clearInterval(statusHide);
+                $(".result").hide();
+                ticks = 0;
+            }
+        }, 50);
+        var fieldShow = setInterval(function () {
+            $(".field-js").show();
+            ticks++;
+            $(".field-js").css("opacity", (0.1 * (ticks)).toString());
+            if (ticks == 10) {
+                clearInterval(fieldShow);
+                ticks = 0;
+            }
+        }, 50);
     }
 
 })();
