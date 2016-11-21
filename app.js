@@ -43,13 +43,12 @@
                     }
                 });
                 if (arr.indexOf(null) == -1) {
-                    result.innerText = "Draw!";
+                    hideShow("Draw");
                     clear(arr);
                 }
                 if (won(arr, playerType)) {
-                    result.innerText = playerType + " win!";
-                    hideShow();
-                    clear(arr);
+                    fire(arr, playerType);
+                    hideShow(playerType);
                     if (playerType == "X") {
                         scoreX.innerText = Number(scoreX.innerText) + 1;
                     } else {
@@ -59,8 +58,8 @@
                     arr = minimax(arr, computerType);
                     render(arr);
                     if (won(arr, computerType)) {
-                        result.innerText = computerType + "win!";
-                        clear(arr);
+                        fire(arr, computerType);
+                        hideShow(computerType);
                         if (computerType == "X") {
                             scoreX.innerText = Number(scoreX.innerText) + 1;
                         } else {
@@ -68,7 +67,7 @@
                         }
                     }
                     if (arr.indexOf(null) == -1) {
-                        result.innerText = "Draw!";
+                        hideShow("Draw");
                         clear(arr);
                     }
                 }
@@ -118,6 +117,7 @@
     function render(arr) {
         cells.forEach(function (item, i) {
             item.innerText = arr[i];
+            item.setAttribute("style", "background-color: #0cc0a8");
         });
     }
 
@@ -125,48 +125,64 @@
         arr.forEach(function (item, i) {
             arr[i] = null;
         });
-        console.log(arr);
         render(arr);
     }
 
-    function hideShow() {
+    function hideShow(type) {
         var ticks = 0;
         var fieldHide = setInterval(function () {
             ticks++;
-            $(".field-js").css("opacity", (0.1 * (10 - ticks)).toString());
-            if (ticks == 10) {
+            $(".field-js").css("opacity", (0.1 * (20 - ticks)).toString());
+            if (ticks == 20) {
                 clearInterval(fieldHide);
                 $(".field-js").hide();
+                result.innerText = type;
+                $(".result").show();
                 ticks = 0;
+                var statusHide = setInterval(function () {
+                    ticks++;
+                    if (ticks == 20) {
+                        clearInterval(statusHide);
+                        clear(arr);
+                        $(".result").hide();
+                        ticks = 0;
+                        var fieldShow = setInterval(function () {
+                            $(".field-js").show();
+                            ticks++;
+                            $(".field-js").css("opacity", (0.1 * (ticks)).toString());
+                            if (ticks == 10) {
+                                clearInterval(fieldShow);
+                            }
+                        }, 50);
+                    }
+                }, 50);
             }
         }, 50);
-        var statusShow = setInterval(function () {
-            $(".result").show();
-            ticks++;
-            $(".field-js").css("opacity", (0.1 * (ticks)).toString());
-            if (ticks == 10) {
-                clearInterval(statusShow);
-                ticks = 0;
+    }
+
+    function fire(arr, type) {
+        for (var i = 0; i < 3; i++) {
+            if ((arr[0 + i * 3] == arr[1 + i * 3]) && (arr[0 + i * 3] == arr[2 + i * 3]) && (arr[0 + i * 3] == type)) {
+                cells[0 + i * 3].setAttribute("style", "background-color: #0ca991");
+                cells[1 + i * 3].setAttribute("style", "background-color: #0ca991");
+                cells[2 + i * 3].setAttribute("style", "background-color: #0ca991");
             }
-        }, 50);
-        var statusHide = setInterval(function () {
-            ticks++;
-            $(".result").css("opacity", (0.1 * (10 - ticks)).toString());
-            if (ticks == 10) {
-                clearInterval(statusHide);
-                $(".result").hide();
-                ticks = 0;
+            if ((arr[i] == arr[i + 3]) && (arr[i + 3] == arr[i + 6]) && (arr[i] == type)) {
+                cells[i].setAttribute("style", "background-color: #0ca991");
+                cells[i + 3].setAttribute("style", "background-color: #0ca991");
+                cells[i + 6].setAttribute("style", "background-color: #0ca991");
             }
-        }, 50);
-        var fieldShow = setInterval(function () {
-            $(".field-js").show();
-            ticks++;
-            $(".field-js").css("opacity", (0.1 * (ticks)).toString());
-            if (ticks == 10) {
-                clearInterval(fieldShow);
-                ticks = 0;
+            if ((arr[0] == arr[4]) && (arr[0] == arr[8]) && (arr[0] == type)) {
+                cells[0].setAttribute("style", "background-color: #0ca991");
+                cells[4].setAttribute("style", "background-color: #0ca991");
+                cells[8].setAttribute("style", "background-color: #0ca991");
             }
-        }, 50);
+            if ((arr[2] == arr[4]) && (arr[2] == arr[6]) && (arr[2] == type)) {
+                cells[2].setAttribute("style", "background-color: #0ca991");
+                cells[4].setAttribute("style", "background-color: #0ca991");
+                cells[6].setAttribute("style", "background-color: #0ca991");
+            }
+        }
     }
 
 })();
