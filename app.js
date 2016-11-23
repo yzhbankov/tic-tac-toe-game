@@ -173,12 +173,17 @@
                             $(".field-js").css("opacity", (0.1 * (ticks)).toString());
                             if (ticks == 10) {
                                 clearInterval(fieldShow);
+                                if (playerType=="O"){
+                                    arr = minimax(arr, computerType, playerType);
+                                    render(arr);
+                                }
                             }
                         }, 50);
                     }
                 }, 50);
             }
         }, 50);
+
     }
 
     function fire(arr, type) {
