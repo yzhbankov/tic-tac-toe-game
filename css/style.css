@@ -1,16 +1,18 @@
-.title{
+.title {
     text-align: center;
     font-size: 50px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
-.switchers{
+
+.switchers {
     text-align: center;
     font-size: 50px;
     margin-top: 10px;
 }
-.cell{
-    height:200px;
+
+.cell {
+    height: 200px;
     border-width: 1px;
     border-color: white;
     color: white;
@@ -19,16 +21,62 @@
     font-size: 150px;
     background-color: #0cc0a8;
 }
-.score{
+
+.score {
     font-size: 30px;
     text-align: left;
 }
-.players{
+
+.players {
     text-align: center;
     font-size: 30px;
 }
-.result{
+
+.result {
     margin-top: 5%;
     font-size: 150px;
     text-align: center;
+}
+
+@media screen and (max-width: 740px) {
+    .title {
+        text-align: center;
+        font-size: 40px;
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+
+    .switchers {
+        text-align: center;
+        font-size: 40px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .cell {
+        height: 120px;
+        border-width: 1px;
+        border-color: white;
+        color: white;
+        border-style: solid;
+        text-align: center;
+        font-size: 85px;
+        background-color: #0cc0a8;
+    }
+
+    .score {
+        font-size: 30px;
+        text-align: left;
+    }
+
+    .players {
+        text-align: center;
+        font-size: 30px;
+    }
+
+    .result {
+        margin-top: 10%;
+        font-size: 80px;
+        text-align: center;
+    }
 }

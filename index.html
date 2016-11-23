@@ -11,49 +11,46 @@
 </head>
 <body>
 <div class="title">Tic Tac Toe Game</div>
-<div class="score row">
-    <div class="col-md-4"></div>
-    <div class="col-md-1 players">Score:</div>
-    <div class="col-md-1 score score-X-js">0</div>
-    <div class="col-md-1"></div>
-    <div class="col-md-1 players">Score:</div>
-    <div class="col-md-1 score score-O-js">0</div>
+<div class="score container">
+    <div class="col-md-4 col-xs-0"></div>
+    <div class="col-md-1 col-xs-4 players">Score:</div>
+    <div class="col-md-1 col-xs-1 score score-X-js">0</div>
+    <div class="col-md-1 col-xs-1"></div>
+    <div class="col-md-1 col-xs-4 players">Score:</div>
+    <div class="col-md-1 col-xs-1 score score-O-js">0</div>
 </div>
-<div class="switchers row">
-    <div class="col-md-4"></div>
+<div class="switchers container">
+    <div class="col-md-4 col-xs-1"></div>
     <a href="#">
-        <div class="col-md-1 switch-js-x" style="border-style: solid">X</div>
+        <div class="col-md-1 col-xs-4 switch-js-x" style="border-style: solid">X</div>
     </a>
 
-    <div class="col-md-2"></div>
+    <div class="col-md-2 col-xs-2"></div>
     <a href="#">
-        <div class="col-md-1 switch-js-o">O</div>
+        <div class="col-md-1 col-xs-4 switch-js-o">O</div>
     </a>
 </div>
-<div class="row">
-    <div class="col-md-4"></div>
-    <div class="container-fluid col-md-4 field-js">
-        <div class="row">
-            <div class="col-md-4 cell"></div>
-            <div class="col-md-4 cell"></div>
-            <div class="col-md-4 cell"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 cell"></div>
-            <div class="col-md-4 cell"></div>
-            <div class="col-md-4 cell"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 cell"></div>
-            <div class="col-md-4 cell"></div>
-            <div class="col-md-4 cell"></div>
-        </div>
+<div class="col-md-4 col-xs-0"></div>
+<div class="container-fluid col-md-4 col-xs-12 field-js">
+    <div class="row">
+        <div class="col-md-4 col-xs-4 cell"></div>
+        <div class="col-md-4 col-xs-4 cell"></div>
+        <div class="col-md-4 col-xs-4 cell"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-xs-4 cell"></div>
+        <div class="col-md-4 col-xs-4 cell"></div>
+        <div class="col-md-4 col-xs-4 cell"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-xs-4 cell"></div>
+        <div class="col-md-4 col-xs-4 cell"></div>
+        <div class="col-md-4 col-xs-4 cell"></div>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-5"></div>
-    <div class="result col-md-2"></div>
-    <div class="col-md-5"></div>
+<div class="container">
+    <div class="col-md-5 col-xs-2"></div>
+    <div class="result col-md-7 col-xs-8"></div>
 </div>
 <script src="app.js"></script>
 </body>

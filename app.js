@@ -1,5 +1,5 @@
 /**
- * Created by Iaroslav Zhbankov on 14.11.2016.
+ * Created by ְֳִּ 3 on 23.11.2016.
  */
 (function () {
     var arr = [null, null, null, null, null, null, null, null, null];
@@ -27,7 +27,7 @@
         playerType = "O";
         computerType = "X";
         clear(arr);
-        arr = minimax(arr, computerType);
+        arr = minimax(arr, computerType, playerType);
         render(arr);
     });
 
@@ -43,11 +43,14 @@
                     }
                 });
                 if (arr.indexOf(null) == -1) {
+                    render(arr, 0);
+                    clear(arr, 0);
                     hideShow("Draw");
-                    clear(arr);
+
                 }
                 if (won(arr, playerType)) {
                     fire(arr, playerType);
+                    clear(arr, 0);
                     hideShow(playerType);
                     if (playerType == "X") {
                         scoreX.innerText = Number(scoreX.innerText) + 1;
@@ -55,9 +58,10 @@
                         scoreO.innerText = Number(scoreO.innerText) + 1;
                     }
                 } else {
-                    arr = minimax(arr, computerType);
-                    render(arr);
+                    arr = minimax(arr, computerType, playerType);
                     if (won(arr, computerType)) {
+
+                        clear(arr, 0);
                         fire(arr, computerType);
                         hideShow(computerType);
                         if (computerType == "X") {
@@ -65,10 +69,13 @@
                         } else {
                             scoreO.innerText = Number(scoreO.innerText) + 1;
                         }
+                    } else {
+                        render(arr, 1000);
                     }
                     if (arr.indexOf(null) == -1) {
+                        render(arr, 0);
                         hideShow("Draw");
-                        clear(arr);
+                        clear(arr, 0);
                     }
                 }
             }
@@ -93,39 +100,54 @@
         return false;
     }
 
-    function minimax(arr, type) {
-        var newSet = [];
+    function minimax(arr, computerType, playerType) {
+        var newSetComputer = [];
+        var newSetPlayer = [];
         var result = false;
         for (var i = 0; i < 9; i++) {
-            var brr = arr.slice();
-            if (brr[i] == null) {
-                brr[i] = type;
-                newSet.push(brr);
+            var brrC = arr.slice();
+            var brrP = arr.slice();
+            if (brrC[i] == null) {
+                brrC[i] = computerType;
+                newSetComputer.push(brrC);
+            }
+            if (brrP[i] == null) {
+                brrP[i] = playerType;
+                newSetPlayer.push(brrP);
             }
         }
-        for (var j = 0; j < newSet.length; j++) {
-            if (won(newSet[j], type)) {
+        for (var j = 0; j < newSetComputer.length; j++) {
+            if (won(newSetComputer[j], computerType)) {
                 result = true;
-                return newSet[j];
+                return newSetComputer[j];
             }
         }
+        for (var j = 0; j < newSetComputer.length; j++) {
+            if (won(newSetPlayer[j], playerType)) {
+                result = true;
+                return newSetComputer[j];
+            }
+        }
+
         if (!result) {
-            return newSet[Math.floor(Math.random() * newSet.length)];
+            return newSetComputer[Math.floor(Math.random() * newSetComputer.length)];
         }
     }
 
-    function render(arr) {
-        cells.forEach(function (item, i) {
-            item.innerText = arr[i];
-            item.setAttribute("style", "background-color: #0cc0a8");
-        });
+    function render(arr, delay) {
+        setTimeout(function () {
+            cells.forEach(function (item, i) {
+                item.innerText = arr[i];
+                item.setAttribute("style", "background-color: #0cc0a8");
+            })
+        }, delay);
     }
 
-    function clear(arr) {
+    function clear(arr, delay) {
         arr.forEach(function (item, i) {
             arr[i] = null;
         });
-        render(arr);
+        render(arr, delay);
     }
 
     function hideShow(type) {
@@ -143,7 +165,6 @@
                     ticks++;
                     if (ticks == 20) {
                         clearInterval(statusHide);
-                        clear(arr);
                         $(".result").hide();
                         ticks = 0;
                         var fieldShow = setInterval(function () {
