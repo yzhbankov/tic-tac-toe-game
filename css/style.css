@@ -38,6 +38,14 @@
     text-align: center;
 }
 
+.footer{
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    text-align: center;
+    font-size: small;
+}
+
 @media screen and (max-width: 740px) {
     .title {
         text-align: center;
@@ -78,5 +86,13 @@
         margin-top: 10%;
         font-size: 80px;
         text-align: center;
+    }
+
+    .footer{
+        position: absolute;
+        bottom: 30px;
+        width: 100%;
+        text-align: center;
+        font-size: medium;
     }
 }
