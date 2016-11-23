@@ -43,15 +43,16 @@
                     }
                 });
                 if (arr.indexOf(null) == -1) {
-                    render(arr, 0);
-                    clear(arr, 0);
+                    /*cells.forEach(function (item, i) {
+                     item.innerText = arr[i];
+                     item.setAttribute("style", "background-color: #0cc0a8");
+                     });*/
                     hideShow("Draw");
-
                 }
                 if (won(arr, playerType)) {
                     fire(arr, playerType);
-                    clear(arr, 0);
                     hideShow(playerType);
+
                     if (playerType == "X") {
                         scoreX.innerText = Number(scoreX.innerText) + 1;
                     } else {
@@ -60,8 +61,10 @@
                 } else {
                     arr = minimax(arr, computerType, playerType);
                     if (won(arr, computerType)) {
-
-                        clear(arr, 0);
+                        cells.forEach(function (item, i) {
+                            item.innerText = arr[i];
+                            item.setAttribute("style", "background-color: #0cc0a8");
+                        });
                         fire(arr, computerType);
                         hideShow(computerType);
                         if (computerType == "X") {
@@ -73,9 +76,11 @@
                         render(arr, 1000);
                     }
                     if (arr.indexOf(null) == -1) {
-                        render(arr, 0);
+                        /*cells.forEach(function (item, i) {
+                         item.innerText = arr[i];
+                         item.setAttribute("style", "background-color: #0cc0a8");
+                         });*/
                         hideShow("Draw");
-                        clear(arr, 0);
                     }
                 }
             }
@@ -128,6 +133,9 @@
                 return newSetComputer[j];
             }
         }
+        if (arr.indexOf(null) == -1) {
+            return arr;
+        }
 
         if (!result) {
             return newSetComputer[Math.floor(Math.random() * newSetComputer.length)];
@@ -157,6 +165,7 @@
             $(".field-js").css("opacity", (0.1 * (20 - ticks)).toString());
             if (ticks == 20) {
                 clearInterval(fieldHide);
+                clear(arr, 0);
                 $(".field-js").hide();
                 result.innerText = type;
                 $(".result").show();
@@ -169,15 +178,19 @@
                         ticks = 0;
                         var fieldShow = setInterval(function () {
                             $(".field-js").show();
+
                             ticks++;
                             $(".field-js").css("opacity", (0.1 * (ticks)).toString());
                             if (ticks == 10) {
+
                                 clearInterval(fieldShow);
-                                if (playerType=="O"){
+                                if (playerType == "O") {
                                     arr = minimax(arr, computerType, playerType);
                                     render(arr);
                                 }
+
                             }
+
                         }, 50);
                     }
                 }, 50);
