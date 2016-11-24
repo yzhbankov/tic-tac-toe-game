@@ -3,30 +3,27 @@
  */
 (function () {
     var arr = [null, null, null, null, null, null, null, null, null];
-    var cells = document.querySelectorAll(".cell");
-    if (!NodeList.prototype.forEach) {
-        NodeList.prototype.forEach = Array.prototype.forEach;
-    }
-    var switcherX = document.querySelector(".switch-js-x");
-    var switcherO = document.querySelector(".switch-js-o");
+    var cells = $(".cell");
+    var switcherX = $(".switch-js-x");
+    var switcherO = $(".switch-js-o");
     var playerType = "X";
     var computerType = "O";
-    var scoreO = document.querySelector(".score-O-js");
-    var scoreX = document.querySelector(".score-X-js");
-    var field = document.querySelector(".field-js");
-    var result = document.querySelector(".result");
+    var scoreO = $(".score-O-js");
+    var scoreX = $(".score-X-js");
+    var field = $(".field-js");
+    var result = $(".result");
 
-    switcherX.addEventListener("click", function () {
-        switcherX.setAttribute("style", "border-style: solid;");
-        switcherO.setAttribute("style", "border-style: hidden;");
+    switcherX.on("click", function () {
+        switcherX.css("border-style", "solid");
+        switcherO.css("border-style", "hidden");
         playerType = "X";
         computerType = "O";
         clear(arr);
     });
 
-    switcherO.addEventListener("click", function () {
-        switcherO.setAttribute("style", "border-style: solid;");
-        switcherX.setAttribute("style", "border-style: hidden;");
+    switcherO.on("click", function () {
+        switcherO.css("border-style", "solid");
+        switcherX.css("border-style", "hidden");
         playerType = "O";
         computerType = "X";
         clear(arr);
@@ -34,22 +31,19 @@
         render(arr);
     });
 
-    cells.forEach(function (item) {
-        item.addEventListener("click", function () {
-            if ((item.innerText != "X") && (item.innerText != "O")) {
-                item.innerText = playerType;
-                cells.forEach(function (item, i) {
-                    if ((item.innerText == "X") || (item.innerText == "O")) {
-                        return arr[i] = item.innerText;
+    cells.each(function (item) {
+
+        $(this).on("click", function () {
+            if (($(this).text() != "X") && ($(this).text() != "O")) {
+                $(this).text(playerType);
+                cells.each(function (item) {
+                    if (($(this).text() == "X") || ($(this).text() == "O")) {
+                        return arr[item] = $(this).text();
                     } else {
-                        return arr[i] = null;
+                        return arr[item] = null;
                     }
                 });
                 if (arr.indexOf(null) == -1) {
-                    /*cells.forEach(function (item, i) {
-                     item.innerText = arr[i];
-                     item.setAttribute("style", "background-color: #0cc0a8");
-                     });*/
                     hideShow("Draw");
                 }
                 if (won(arr, playerType)) {
@@ -57,32 +51,28 @@
                     hideShow(playerType);
 
                     if (playerType == "X") {
-                        scoreX.innerText = Number(scoreX.innerText) + 1;
+                        scoreX.text(Number(scoreX.text()) + 1);
                     } else {
-                        scoreO.innerText = Number(scoreO.innerText) + 1;
+                        scoreO.text(Number(scoreO.text()) + 1);
                     }
                 } else {
                     arr = minimax(arr, computerType, playerType);
                     if (won(arr, computerType)) {
-                        cells.forEach(function (item, i) {
-                            item.innerText = arr[i];
-                            item.setAttribute("style", "background-color: #0cc0a8");
+                        cells.each(function (item) {
+                            $(this).text(arr[item]);
+                            $(this).css("background-color", "#0cc0a8");
                         });
                         fire(arr, computerType);
                         hideShow(computerType);
                         if (computerType == "X") {
-                            scoreX.innerText = Number(scoreX.innerText) + 1;
+                            scoreX.text(Number(scoreX.text()) + 1);
                         } else {
-                            scoreO.innerText = Number(scoreO.innerText) + 1;
+                            scoreO.text(Number(scoreO.text()) + 1);
                         }
                     } else {
                         render(arr, 1000);
                     }
                     if (arr.indexOf(null) == -1) {
-                        /*cells.forEach(function (item, i) {
-                         item.innerText = arr[i];
-                         item.setAttribute("style", "background-color: #0cc0a8");
-                         });*/
                         hideShow("Draw");
                     }
                 }
@@ -147,9 +137,9 @@
 
     function render(arr, delay) {
         setTimeout(function () {
-            cells.forEach(function (item, i) {
-                item.innerText = arr[i];
-                item.setAttribute("style", "background-color: #0cc0a8");
+            cells.each(function (item) {
+                $(this).text(arr[item]);
+                $(this).css("background-color", "#0cc0a8");
             })
         }, delay);
     }
@@ -170,7 +160,7 @@
                 clearInterval(fieldHide);
                 clear(arr, 0);
                 $(".field-js").hide();
-                result.innerText = type;
+                result.text(type);
                 $(".result").show();
                 ticks = 0;
                 var statusHide = setInterval(function () {
@@ -191,9 +181,7 @@
                                     arr = minimax(arr, computerType, playerType);
                                     render(arr);
                                 }
-
                             }
-
                         }, 50);
                     }
                 }, 50);
@@ -205,24 +193,24 @@
     function fire(arr, type) {
         for (var i = 0; i < 3; i++) {
             if ((arr[0 + i * 3] == arr[1 + i * 3]) && (arr[0 + i * 3] == arr[2 + i * 3]) && (arr[0 + i * 3] == type)) {
-                cells[0 + i * 3].setAttribute("style", "background-color: #0ca991");
-                cells[1 + i * 3].setAttribute("style", "background-color: #0ca991");
-                cells[2 + i * 3].setAttribute("style", "background-color: #0ca991");
+                cells[0 + i * 3].setAttribute("style", "background-color:#0ca991");
+                cells[1 + i * 3].setAttribute("style", "background-color:#0ca991");
+                cells[2 + i * 3].setAttribute("style", "background-color:#0ca991");
             }
             if ((arr[i] == arr[i + 3]) && (arr[i + 3] == arr[i + 6]) && (arr[i] == type)) {
-                cells[i].setAttribute("style", "background-color: #0ca991");
-                cells[i + 3].setAttribute("style", "background-color: #0ca991");
-                cells[i + 6].setAttribute("style", "background-color: #0ca991");
+                cells[i].setAttribute("style", "background-color:#0ca991");
+                cells[i + 3].setAttribute("style", "background-color:#0ca991");
+                cells[i + 6].setAttribute("style", "background-color:#0ca991");
             }
             if ((arr[0] == arr[4]) && (arr[0] == arr[8]) && (arr[0] == type)) {
-                cells[0].setAttribute("style", "background-color: #0ca991");
-                cells[4].setAttribute("style", "background-color: #0ca991");
-                cells[8].setAttribute("style", "background-color: #0ca991");
+                cells[0].setAttribute("style", "background-color:#0ca991");
+                cells[4].setAttribute("style", "background-color:#0ca991");
+                cells[8].setAttribute("style", "background-color:#0ca991");
             }
             if ((arr[2] == arr[4]) && (arr[2] == arr[6]) && (arr[2] == type)) {
-                cells[2].setAttribute("style", "background-color: #0ca991");
-                cells[4].setAttribute("style", "background-color: #0ca991");
-                cells[6].setAttribute("style", "background-color: #0ca991");
+                cells[2].setAttribute("style", "background-color:#0ca991");
+                cells[4].setAttribute("style", "background-color:#0ca991");
+                cells[6].setAttribute("style", "background-color:#0ca991");
             }
         }
     }
