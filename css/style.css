@@ -89,8 +89,8 @@
     }
 
     .footer{
-        position: relative;
-        bottom: 0;
+        position: absolute;
+        bottom: 0px;
         width: 100%;
         text-align: center;
         font-size: medium;
@@ -140,8 +140,8 @@
     }
 
     .footer{
-        position: relative;
-        bottom: 0;
+        position: absolute;
+        bottom: 0px;
         width: 100%;
         text-align: center;
         font-size: medium;
