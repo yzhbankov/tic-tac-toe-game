@@ -4,8 +4,9 @@
 (function () {
     var arr = [null, null, null, null, null, null, null, null, null];
     var cells = document.querySelectorAll(".cell");
-    NodeList.prototype.forEach = Array.prototype.forEach;
-    /*Array.prototype.forEach(NodeList);*/
+    if (!NodeList.prototype.forEach) {
+        NodeList.prototype.forEach = Array.prototype.forEach;
+    }
     var switcherX = document.querySelector(".switch-js-x");
     var switcherO = document.querySelector(".switch-js-o");
     var playerType = "X";
