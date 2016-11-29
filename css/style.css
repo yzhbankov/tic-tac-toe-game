@@ -40,10 +40,15 @@
 
 .footer {
     position: absolute;
-    bottom: 30px;
+    bottom: 60px;
     width: 100%;
     text-align: center;
     font-size: small;
+}
+.wrap{
+    display: block;
+    margin:0 auto;
+    width:600px;
 }
 
 @media screen and (max-width: 740px) {
@@ -68,7 +73,7 @@
         color: white;
         border-style: solid;
         text-align: center;
-        font-size: 85px;
+        font-size: 80px;
         background-color: #0cc0a8;
     }
 
@@ -94,6 +99,11 @@
         width: 100%;
         text-align: center;
         font-size: medium;
+    }
+    .wrap{
+        display: block;
+        margin:0 auto;
+        width:300px;
     }
 }
 
@@ -119,7 +129,7 @@
         color: white;
         border-style: solid;
         text-align: center;
-        font-size: 85px;
+        font-size: 80px;
         background-color: #0cc0a8;
     }
 
@@ -145,5 +155,10 @@
         width: 100%;
         text-align: center;
         font-size: medium;
+    }
+    .wrap{
+        display: block;
+        margin:0 auto;
+        width:300px;
     }
 }
