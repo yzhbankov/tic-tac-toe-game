@@ -12,6 +12,7 @@
     var scoreX = $(".score-X-js");
     var field = $(".field-js");
     var result = $(".result");
+    var running = true;
 
     switcherX.on("click", function () {
         switcherX.css("border-style", "solid");
@@ -28,13 +29,14 @@
         computerType = "X";
         clear(arr);
         arr = minimax(arr, computerType, playerType);
-        render(arr);
+        render(arr, 500);
     });
 
     cells.each(function (item) {
 
         $(this).on("click", function () {
-            if (($(this).text() != "X") && ($(this).text() != "O")) {
+            if (($(this).text() != "X") && ($(this).text() != "O")&&(running)) {
+                running = false;
                 $(this).text(playerType);
                 cells.each(function (item) {
                     if (($(this).text() == "X") || ($(this).text() == "O")) {
@@ -140,6 +142,7 @@
             cells.each(function (item) {
                 $(this).text(arr[item]);
                 $(this).css("background-color", "#0cc0a8");
+                running = true;
             })
         }, delay);
     }
