@@ -54,20 +54,20 @@
 @media screen and (max-width: 740px) {
     .title {
         text-align: center;
-        font-size: 40px;
+        font-size: 30px;
         margin-top: 0px;
         margin-bottom: 0px;
     }
 
     .switchers {
         text-align: center;
-        font-size: 40px;
+        font-size: 30px;
         margin-top: 0px;
         margin-bottom: 0px;
     }
 
     .cell {
-        height: 120px;
+        height: 100px;
         border-width: 1px;
         border-color: white;
         color: white;
@@ -78,13 +78,13 @@
     }
 
     .score {
-        font-size: 30px;
+        font-size: 25px;
         text-align: left;
     }
 
     .players {
         text-align: center;
-        font-size: 30px;
+        font-size: 20px;
     }
 
     .result {
@@ -94,8 +94,7 @@
     }
 
     .footer {
-        position: absolute;
-        bottom: 0px;
+        flex: 0 0 auto;
         width: 100%;
         text-align: center;
         font-size: medium;
@@ -110,14 +109,14 @@
 @media screen and (max-width: 320px) {
     .title {
         text-align: center;
-        font-size: 30px;
+        font-size: 20px;
         margin-top: 0px;
         margin-bottom: 0px;
     }
 
     .switchers {
         text-align: center;
-        font-size: 30px;
+        font-size: 20px;
         margin-top: 0px;
         margin-bottom: 0px;
     }
@@ -150,8 +149,7 @@
     }
 
     .footer {
-        position: absolute;
-        bottom: 0px;
+        flex: 0 0 auto;
         width: 100%;
         text-align: center;
         font-size: medium;
